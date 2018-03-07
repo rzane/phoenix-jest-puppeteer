@@ -11,8 +11,6 @@ defmodule BlogWeb.PostView do
   end
 
   def render("post.json", %{post: post}) do
-    %{id: post.id,
-      title: post.title,
-      content: post.content}
+    %{id: post.id, title: post.title, content: post.content}
   end
 end

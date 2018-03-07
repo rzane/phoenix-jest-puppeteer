@@ -4,7 +4,7 @@ defmodule BlogWeb.PostController do
   alias Blog.Posts
   alias Blog.Posts.Post
 
-  action_fallback BlogWeb.FallbackController
+  action_fallback(BlogWeb.FallbackController)
 
   def index(conn, _params) do
     posts = Posts.list_posts()
@@ -35,6 +35,7 @@ defmodule BlogWeb.PostController do
 
   def delete(conn, %{"id" => id}) do
     post = Posts.get_post!(id)
+
     with {:ok, %Post{}} <- Posts.delete_post(post) do
       send_resp(conn, :no_content, "")
     end
