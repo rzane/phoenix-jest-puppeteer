@@ -1,13 +1,18 @@
 {
+  "license": "MIT",
   "scripts": {
     "start": "node start.js watch -d ../priv/static/assets src/index.js"
   },
   "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "node-sass": "^4.7.2",
     "parcel-bundler": "^1.6.2"
   },
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   }

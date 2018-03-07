@@ -33,7 +33,7 @@ config :blog, BlogWeb.Endpoint,
 config :blog, BlogWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      ~r{priv/static/.*(png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/blog_web/views/.*(ex)$},
       ~r{lib/blog_web/templates/.*(eex)$}
