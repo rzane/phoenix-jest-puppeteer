@@ -1,10 +1,17 @@
 use Mix.Config
 
-# We don't run a server during test. If one is required,
-# you can enable the server option below.
-config :blog, BlogWeb.Endpoint,
-  http: [port: 4001],
-  server: false
+if System.get_env("INTEGRATION") do
+  config :blog, BlogWeb.Endpoint,
+    http: [port: 4002],
+    server: true,
+    watchers: [npm: ["run", "-S", "start", cd: Path.expand("../assets", __DIR__)]]
+
+  config :blog, sql_sandbox: true
+else
+  config :blog, BlogWeb.Endpoint,
+    http: [port: 4001],
+    server: false
+end
 
 # Print only warnings and errors during test
 config :logger, level: :warn

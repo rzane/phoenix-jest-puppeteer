@@ -10,7 +10,10 @@ defmodule Blog.Mixfile do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      preferred_cli_env: [
+        integration: :test
+      ]
     ]
   end
 
@@ -54,7 +57,8 @@ defmodule Blog.Mixfile do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      integration: ["ecto.create --quiet", "ecto.migrate", "phx.server"]
     ]
   end
 end
