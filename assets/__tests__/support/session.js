@@ -1,18 +1,18 @@
-const fetch = require("node-fetch");
+import fetch from "node-fetch";
 
 const SANDBOX = "http://localhost:4001/sandbox";
 const CALL = `${SANDBOX}/call`;
 
-function request(url, opts) {
+const request = (url, opts) => {
   const method = opts.method || "POST";
   const headers = opts.headers || {};
-  const payload = { method: method, headers: headers };
+  const payload = { method, headers };
 
   if (opts.data) {
     payload.body = JSON.stringify(opts.data);
   }
 
-  return fetch(url, payload).then(function(response) {
+  return fetch(url, payload).then(response => {
     if (!response.ok) {
       throw new Error(`${method} ${url} failed with: ${response.statusText}`);
     }
@@ -23,36 +23,30 @@ function request(url, opts) {
 
     return response.json();
   });
-}
+};
 
-function buildSession(userAgent) {
+const buildSession = userAgent => {
   const headers = {
     "User-Agent": userAgent,
     "Content-Type": "application/json"
   };
 
-  function call(key, options) {
-    return request(CALL, {
-      data: { key: key, options: options },
-      headers: headers
+  const call = (key, options) =>
+    request(CALL, {
+      data: { key, options },
+      headers
     });
-  }
 
-  function finish() {
-    return request(SANDBOX, {
+  const finish = () =>
+    request(SANDBOX, {
       method: "DELETE",
-      headers: headers,
+      headers,
       type: "text"
     });
-  }
 
-  return {
-    userAgent: userAgent,
-    call: call,
-    finish: finish
-  };
-}
+  return { userAgent, call, finish };
+};
 
-module.exports = function startSession() {
+export default () => {
   return request(SANDBOX, { type: "text" }).then(buildSession);
 };
