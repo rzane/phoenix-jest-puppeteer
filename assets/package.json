@@ -1,15 +1,27 @@
 {
   "license": "MIT",
   "scripts": {
-    "start": "node start.js watch -d ../priv/static/assets src/index.js"
+    "start": "node start.js watch -d ../priv/static/assets src/index.js",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-puppeteer-preset",
+    "testMatch": ["**/?(*.)(spec|test).js?(x)"]
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "jest": "^22.4.2",
+    "jest-environment-node": "^22.0.0",
+    "jest-puppeteer-preset": "^2.0.0",
+    "node-fetch": "^2.1.1",
     "node-sass": "^4.7.2",
-    "parcel-bundler": "^1.6.2"
+    "parcel-bundler": "^1.6.2",
+    "puppeteer": "^1.0.0"
   },
   "dependencies": {
     "bootstrap": "^4.0.0",

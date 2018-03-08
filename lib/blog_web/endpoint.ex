@@ -2,7 +2,11 @@ defmodule BlogWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :blog
 
   if Application.get_env(:blog, :sql_sandbox) do
-    plug(Phoenix.Ecto.SQL.Sandbox)
+    plug(
+      Phoenix.Ecto.SQL.Sandbox,
+      at: "/sandbox",
+      repo: Blog.Repo
+    )
   end
 
   socket("/socket", BlogWeb.UserSocket)
@@ -49,6 +53,10 @@ defmodule BlogWeb.Endpoint do
     key: "_blog_key",
     signing_salt: "apFK24MN"
   )
+
+  if Application.get_env(:blog, :sql_sandbox) do
+    plug(BlogWeb.Sandbox, at: "/sandbox/call")
+  end
 
   plug(BlogWeb.Router)
 

@@ -1,20 +1,14 @@
 use Mix.Config
 
-if System.get_env("INTEGRATION") do
-  config :blog, BlogWeb.Endpoint,
-    http: [port: 4002],
-    server: true,
-    watchers: [npm: ["run", "-S", "start", cd: Path.expand("../assets", __DIR__)]]
+config :blog, BlogWeb.Endpoint,
+  http: [port: 4001],
+  server: true
 
-  config :blog, sql_sandbox: true
-else
-  config :blog, BlogWeb.Endpoint,
-    http: [port: 4001],
-    server: false
-end
+config :blog, sql_sandbox: true
 
 # Print only warnings and errors during test
-config :logger, level: :warn
+# config :logger, level: :warn
+config :logger, level: :debug
 
 # Configure your database
 config :blog, Blog.Repo,
