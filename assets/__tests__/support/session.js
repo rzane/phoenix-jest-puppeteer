@@ -1,9 +1,8 @@
 import fetch from "node-fetch";
 
 const SANDBOX = "http://localhost:4001/sandbox";
-const CALL = `${SANDBOX}/call`;
 
-const request = (url, opts) => {
+const sandbox = (opts) => {
   const method = opts.method || "POST";
   const headers = opts.headers || {};
   const payload = { method, headers };
@@ -12,9 +11,9 @@ const request = (url, opts) => {
     payload.body = JSON.stringify(opts.data);
   }
 
-  return fetch(url, payload).then(response => {
+  return fetch(SANDBOX, payload).then(response => {
     if (!response.ok) {
-      throw new Error(`${method} ${url} failed with: ${response.statusText}`);
+      throw new Error(`${method} ${SANDBOX} failed with: ${response.statusText}`);
     }
 
     if (opts.type === "text") {
@@ -32,21 +31,22 @@ const buildSession = userAgent => {
   };
 
   const call = (key, options) =>
-    request(CALL, {
+    sandbox({
+      method: "PUT",
       data: { key, options },
       headers
     });
 
   const finish = () =>
-    request(SANDBOX, {
+    sandbox({
       method: "DELETE",
-      headers,
-      type: "text"
+      type: "text",
+      headers
     });
 
   return { userAgent, call, finish };
 };
 
 export default () => {
-  return request(SANDBOX, { type: "text" }).then(buildSession);
+  return sandbox({ type: "text", method: "POST" }).then(buildSession);
 };

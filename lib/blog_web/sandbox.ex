@@ -9,7 +9,7 @@ defmodule BlogWeb.Sandbox do
   end
 
   @impl true
-  def call(%Plug.Conn{method: "POST", path_info: path, params: params} = conn, %{path: path}) do
+  def call(%Plug.Conn{method: "PUT", path_info: path, params: params} = conn, %{path: path}) do
     do_call(conn, params)
   end
 
