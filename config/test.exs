@@ -7,8 +7,7 @@ config :blog, BlogWeb.Endpoint,
 config :blog, sql_sandbox: true
 
 # Print only warnings and errors during test
-# config :logger, level: :warn
-config :logger, level: :debug
+config :logger, level: :warn
 
 # Configure your database
 config :blog, Blog.Repo,

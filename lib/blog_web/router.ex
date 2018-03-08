@@ -14,10 +14,13 @@ defmodule BlogWeb.Router do
   end
 
   scope "/", BlogWeb do
+    pipe_through(:api)
+    resources("/posts", PostController, except: [:new, :edit])
+  end
+
+  scope "/", BlogWeb do
     # Use the default browser stack
     pipe_through(:browser)
-    resources("/posts", PostController, except: [:new, :edit])
-
     get("/*path", PageController, :index)
   end
 end
