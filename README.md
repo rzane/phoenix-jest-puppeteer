@@ -1,5 +1,7 @@
 # Phoenix Puppeteer Feature Testing
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/rzane/phoenix-jest-puppeteer.svg)](https://greenkeeper.io/)
+
 This project demonstrates a technique for testing a Phoenix application using Jest and Puppeteer.
 
 For starters, we use [jest-puppeteer-preset](https://github.com/smooth-code/jest-puppeteer). It gets puppeteer playing nicely with Jest and provides a utility for starting our server. Props to those people.
